@@ -9,25 +9,66 @@ CREATE TABLE tasks (
   completed boolean
 );
 
-ALTER TABLE tasks DROP completed;
-ALTER TABLE tasks ADD completed_at timestamp DEFAULT NULL;
-ALTER TABLE tasks DROP updated_at;
-ALTER TABLE tasks ADD updated_at timestamp NOT NULL DEFAULT now();
+ALTER TABLE tasks 
+DROP completed;
 
-INSERT INTO tasks VALUES (default, 'Study SQL', 'Complete this exercise', default, default, default);
-INSERT INTO tasks (title, description) VALUES ('Study PostgreSQL', 'Read all the documentation');
-SELECT title FROM tasks WHERE completed_at IS NULL;
-UPDATE tasks SET completed_at=now() WHERE title='Study SQL';
-SELECT title, description FROM tasks WHERE completed_at IS NULL;
-SELECT * FROM tasks ORDER BY created_at DESC;
+ALTER TABLE tasks 
+ADD completed_at timestamp DEFAULT NULL;
 
-INSERT INTO tasks (title, description) VALUES ('mistake 1', 'a test entry');
-INSERT INTO tasks (title, description) VALUES ('mistake 2', 'another test entry');
-INSERT INTO tasks (title, description) VALUES ('third mistake', 'another test entry');
+ALTER TABLE tasks 
+DROP updated_at;
 
-SELECT title FROM tasks WHERE title LIKE '%mistake%';
+ALTER TABLE tasks 
+ADD updated_at timestamp NOT NULL DEFAULT now();
 
-DELETE FROM tasks WHERE title LIKE '%mistake 1%';
-SELECT title, description FROM tasks WHERE title LIKE '%mistake%';
-DELETE FROM tasks WHERE title LIKE '%mistake%';
-SELECT * FROM tasks ORDER BY title ASC;
+INSERT INTO tasks 
+VALUES (default, 'Study SQL', 'Complete this exercise', default, default, default);
+
+INSERT INTO tasks (title, description) 
+VALUES ('Study PostgreSQL', 'Read all the documentation');
+
+SELECT title 
+FROM tasks 
+WHERE completed_at IS NULL;
+
+UPDATE tasks 
+SET completed_at=now() 
+WHERE title='Study SQL';
+
+SELECT title, description 
+FROM tasks 
+WHERE completed_at IS NULL;
+
+SELECT * 
+FROM tasks 
+ORDER BY created_at DESC;
+
+INSERT INTO tasks (title, description) 
+VALUES ('mistake 1', 'a test entry');
+
+INSERT INTO tasks (title, description) 
+VALUES ('mistake 2', 'another test entry');
+
+INSERT INTO tasks (title, description) 
+VALUES ('third mistake', 'another test entry');
+
+SELECT title 
+FROM tasks 
+WHERE title LIKE '%mistake%';
+
+DELETE 
+FROM tasks 
+WHERE title LIKE '%mistake 1%';
+
+SELECT title, description 
+FROM tasks 
+WHERE title LIKE '%mistake%';
+
+DELETE 
+FROM tasks 
+WHERE title 
+LIKE '%mistake%';
+
+SELECT * 
+FROM tasks 
+ORDER BY title ASC;
