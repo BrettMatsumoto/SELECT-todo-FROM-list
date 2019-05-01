@@ -15,11 +15,9 @@ DROP completed;
 ALTER TABLE tasks 
 ADD completed_at timestamp DEFAULT NULL;
 
-ALTER TABLE tasks 
-DROP updated_at;
-
-ALTER TABLE tasks 
-ADD updated_at timestamp NOT NULL DEFAULT now();
+ALTER TABLE tasks
+ALTER updated_at SET NOT NULL
+ALTER updated_at SET DEFAULT now();
 
 INSERT INTO tasks 
 VALUES (default, 'Study SQL', 'Complete this exercise', default, default, default);
